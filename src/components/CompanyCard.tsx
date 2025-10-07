@@ -44,9 +44,26 @@ export const CompanyCard = ({ company, index, view = "grid" }: CompanyCardProps)
         <CardContent className={isListView ? "p-6" : "p-6"}>
           <div className={isListView ? "flex items-start justify-between gap-6" : ""}>
             <div className={isListView ? "flex-1" : ""}>
-              <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
-                {company.name}
-              </h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                  {company.name}
+                </h3>
+                {!isListView && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="ml-4 shrink-0 border-primary/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(company.website, "_blank", "noopener,noreferrer");
+                    }}
+                    aria-label={`Visit ${company.name} website`}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Visit Site
+                  </Button>
+                )}
+              </div>
               <div className={isListView ? "flex items-center gap-4 mb-3" : "space-y-2 mb-4"}>
                 <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors duration-200">
                   <Briefcase className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
@@ -63,16 +80,18 @@ export const CompanyCard = ({ company, index, view = "grid" }: CompanyCardProps)
                 </p>
               )}
             </div>
-            <Button
-              variant="outline"
-              size={isListView ? "default" : "sm"}
-              className="group/btn border-primary/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 flex-shrink-0"
-              onClick={() => window.open(company.website, "_blank", "noopener,noreferrer")}
-              aria-label={`Visit ${company.name} website`}
-            >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              Visit Site
-            </Button>
+            {isListView && (
+              <Button
+                variant="outline"
+                size="default"
+                className="group/btn border-primary/30 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 flex-shrink-0"
+                onClick={() => window.open(company.website, "_blank", "noopener,noreferrer")}
+                aria-label={`Visit ${company.name} website`}
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Visit Site
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>
