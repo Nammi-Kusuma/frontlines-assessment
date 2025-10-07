@@ -13,7 +13,11 @@ export const ViewToggle = ({ view, onViewChange }: ViewToggleProps) => {
         variant={view === "grid" ? "default" : "ghost"}
         size="sm"
         onClick={() => onViewChange("grid")}
-        className={view === "grid" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "hover:bg-muted"}
+        className={`transition-colors ${
+          view === "grid" 
+            ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+        }`}
         aria-label="Grid view"
         aria-pressed={view === "grid"}
       >
@@ -23,7 +27,11 @@ export const ViewToggle = ({ view, onViewChange }: ViewToggleProps) => {
         variant={view === "list" ? "default" : "ghost"}
         size="sm"
         onClick={() => onViewChange("list")}
-        className={view === "list" ? "bg-primary text-primary-foreground hover:bg-primary/90" : "hover:bg-muted"}
+        className={`transition-colors ${
+          view === "list" 
+            ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+            : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+        }`}
         aria-label="List view"
         aria-pressed={view === "list"}
       >
